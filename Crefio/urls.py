@@ -15,16 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.contrib import admin
 from django.urls import path
 from crefio_App.views import *
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
 
     # show all categories
     path('categories/', category_list, name='category_list'),
 
     # show all blog posts
     path('blogs/', blog_list, name='blog_list'),
+
+    path('blogs/<slug:slug>/', blog_detail, name='blog_detail'),
+     path('contact/', contact_form, name='contact_form'),
 
     
 ]

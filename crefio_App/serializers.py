@@ -8,10 +8,16 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class BlogPostSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
 
+class BlogPostSerializer(serializers.ModelSerializer):
+    Category=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(),
+                                                source='category',read_only=False)
     class Meta:
         model = BlogPost
-        
-        fields='__all__'
+        fields = '__all__'
+
+class ContactSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
+    email = serializers.EmailField()
+    mobile = serializers.CharField(max_length=15)
+    message = serializers.CharField()
