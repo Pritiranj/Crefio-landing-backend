@@ -1,23 +1,44 @@
 from rest_framework import serializers
-from .models import Category, BlogPost
+from .models import Category, BlogPost,Contact,JobPost, JobApplication
 
-
+# -------------------------Category Serializer------------------------
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
 
-
+# -------------------------BlogPost Serializer------------------------
 
 class BlogPostSerializer(serializers.ModelSerializer):
     Category=serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(),
-                                                source='category',read_only=False)
+                                                read_only=False)
     class Meta:
         model = BlogPost
         fields = '__all__'
 
-class ContactSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
-    email = serializers.EmailField()
-    mobile = serializers.CharField(max_length=15)
-    message = serializers.CharField()
+# -------------------------Contact Serializer------------------------
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = '__all__'
+
+
+# -------------------------JobPost Serializer------------------------
+
+class JobPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobPost
+        fields = '__all__'
+
+
+# -------------------------JobApplication Serializer------------------------
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+    role_name = serializers.CharField(source='role_applied_for.role', read_only=True)
+
+    class Meta:
+        model = JobApplication
+        fields = '__all__'
+    

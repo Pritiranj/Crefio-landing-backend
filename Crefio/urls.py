@@ -29,7 +29,15 @@ urlpatterns = [
     path('blogs/', blog_list, name='blog_list'),
 
     path('blogs/<slug:slug>/', blog_detail, name='blog_detail'),
-     path('contact/', contact_form, name='contact_form'),
+    
+    path('contact/', contact_form, name='contact_form'),
+    path('contacts/', contact_list, name='contact_list'),
+
+    path('job/', job_post, name='job_post'),
+    path('job/<int:pk>/', job_post, name='job_detail'),
+
+    path('applications/', job_application, name='job_application'),
+    path('applications/<int:pk>/', job_application, name='job_application_detail'),
 
     
 ]
